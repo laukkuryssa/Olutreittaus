@@ -21,7 +21,7 @@
  <% end %>
 </p>
 
-<p<
+<p>
 <%= link_to 'Beers', beers_path %>
 </p>
 

@@ -1,6 +1,5 @@
 class SessionsController < ApplicationController
   def new
-	@rating = Rating.all
     # renderöi kirjautumissivun
   end
 

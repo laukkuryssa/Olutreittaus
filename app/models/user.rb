@@ -3,8 +3,4 @@ class User < ActiveRecord::Base
 
     has_many :ratings
 
-
-    def summa
-	return ratings.count
-    end
 end

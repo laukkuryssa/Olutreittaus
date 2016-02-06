@@ -13,17 +13,5 @@
 	<% end %>
 </p>
 
-<p>
-  <strong>Ratings</strong>
-  
-</p>
-
-
-<p>
- <% @user.ratings.each do |rating| %>
-   <%= link_to rating.name, rating %>
- <% end %>
-</p>
-
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

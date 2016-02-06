@@ -1,4 +1,8 @@
 class Brewery < ActiveRecord::Base
+	include RatingAverage
+
+	validates :name, presence: true
+
 	has_many :beers, dependent: :destroy
 	has_many :ratings, through: :beers
 
@@ -10,12 +14,6 @@ class Brewery < ActiveRecord::Base
 	
 	def summa
 		return ratings.count
-	end
-	
-	def average_rating
-		t = ratings.map(&:score)
-		a = t.sum
-		return a.to_f / ratings.count.to_f
 	end
 
 	def restart

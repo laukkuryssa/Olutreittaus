@@ -9,7 +9,7 @@
 <% if @user.ratings.empty? %>
 	 User has no ratings.
 	<% else %>
- 	 Has made <%= pluralize(@ratings.count, 'rating') %>, average <%= @user.average_rating %>
+ 	 Has made <%= pluralize(@user.ratings.count, 'rating') %>, average <%= @user.average_rating %>
 	<% end %>
 </p>
 
@@ -17,10 +17,11 @@
   <strong>Ratings</strong>
 </p>
 
+
 <p>
- <% @user.ratings.each do |rating| %>
-   <%= link_to rating.name, rating %>
- <% end %>
+  <% @user.ratings.each do |rating| %>
+    <li> <%= rating %> <%= link_to 'delete', rating_path(rating.id), method: :delete, data: { confirm: 'Are you sure?' } %> </li>
+  <% end %>
 </p>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |

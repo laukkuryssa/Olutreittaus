@@ -9,7 +9,7 @@
 <% if @user.ratings.empty? %>
 	 User has no ratings.
 	<% else %>
- 	 Has made <%= pluralize(@rating.count, 'rating') %>, average <%= @user.average_rating %>
+ 	 Has made <%= pluralize(@user.ratings.count, 'rating') %>, average <%= @user.average_rating %>
 	<% end %>
 </p>
 
@@ -19,7 +19,7 @@
 
 <p>
  <% @user.ratings.each do |rating| %>
-   <%= link_to rating.name, rating %>
+   <%= link_to @user.name, rating %>
  <% end %>
 </p>
 

@@ -11,9 +11,22 @@
     <%= link_to 'breweries', breweries_path %>
     <%= link_to 'beers', beers_path %>
     <%= link_to 'ratings', ratings_path %>
+    <%= link_to 'signin', signin_path %>
+    <%= link_to 'signout', session_path, method: :delete %>
+    <%= link_to 'users', users_path %>
   </div>
 
 <%= yield %>
+
+<% if session[:last_rating].nil? %>
+  <p>no ratings given</p>
+<% else %>
+  <p>previous rating: <%= session[:last_rating] %></p>
+<% end %>
+
+<% if not current_user.nil? %>
+  <p><%= current_user.username %> signed in</p>
+<% end %>
 
 </body>
 </html>

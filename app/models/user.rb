@@ -17,6 +17,8 @@ class User < ActiveRecord::Base
 	
     has_many :ratings, dependent: :destroy
     has_many :raters, -> { uniq }, through: :ratings, source: :user
+    has_many :memberships
+    has_many :beer_clubs, through: :memberships
 
     def count
 	return ratings.count

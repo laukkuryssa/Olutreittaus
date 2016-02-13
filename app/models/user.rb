@@ -23,4 +23,19 @@ class User < ActiveRecord::Base
     def count
 	return ratings.count
     end
+
+    def favorite_beer
+       return nil if ratings.empty?
+    ratings.order(score: :desc).limit(1).first.beer
+    end
+
+    def rated_styles
+        return nil if ratings.empty?
+    ratings.select{ |a| a.beer.style }
+    end
+
+    def favorite_style
+	return nil if ratings.empty?  
+    rated_styles.order(beer.average :desc).limit(1).first.beer.style
+    end
 end

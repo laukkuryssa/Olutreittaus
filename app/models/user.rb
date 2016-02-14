@@ -29,13 +29,62 @@ class User < ActiveRecord::Base
     ratings.order(score: :desc).limit(1).first.beer
     end
 
-    def rated_styles
+    def ratings_having_styles
         return nil if ratings.empty?
-    ratings.select{ |a| a.beer.style }
+    ratings.beer.select{ |a| a.beer.style }
     end
 
     def favorite_style
-	return nil if ratings.empty?  
-    rated_styles.order(beer.average :desc).limit(1).first.beer.style
-    end
+        return nil if ratings.empty?
+	sum = {}
+	amount = {}
+	ratings.each do |rating|
+	  s = rating.beer.style
+	  if not sum.has_key?(s)
+	    sum[s] = rating.score
+	    amount[s] = 1
+	  else
+	    vanhaluku = sum[s]
+	    sum[s] = vanhaluku + rating.score
+	    vanhamaara = amount[s]
+	    amount[s] = vanhamaara + 1
+	  end
+	end
+	  highest = 0
+	  hstyle = nil
+	  sum.each do |r|
+		if (sum[r.first].to_f / amount[r.first].to_f) > highest
+		  highest = sum[r.first].to_f / amount[r.first].to_f
+		  hstyle = sum.index(sum[r.first])
+	  	end
+	  end
+	return hstyle
+	end
+
+    def favorite_brewery
+        return nil if ratings.empty?
+	sum = {}
+	amount = {}
+	ratings.each do |rating|
+	  s = rating.beer.brewery
+	  if not sum.has_key?(s)
+	    sum[s] = rating.score
+	    amount[s] = 1
+	  else
+	    vanhaluku = sum[s]
+	    sum[s] = vanhaluku + rating.score
+	    vanhamaara = amount[s]
+	    amount[s] = vanhamaara + 1
+	  end
+	end
+	  highest = 0
+	  hbrewery = nil
+	  sum.each do |r|
+		if (sum[r.first].to_f / amount[r.first].to_f) > highest
+		  highest = sum[r.first].to_f / amount[r.first].to_f
+		  hbrewery = sum.index(sum[r.first])
+	  	end
+	  end
+	return hbrewery.name
+	end
 end

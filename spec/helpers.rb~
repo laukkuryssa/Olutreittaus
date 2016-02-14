@@ -1,0 +1,22 @@
+module Helpers
+
+  def sign_in(credentials)
+    visit signin_path
+    fill_in('username', with:credentials[:username])
+    fill_in('password', with:credentials[:password])
+    click_button('Log in')
+  end
+
+  def create_two_ratings()
+  visit new_rating_path
+    select('iso 3', from:'rating[beer_id]')
+    fill_in('rating[score]', with:'15')
+    click_button "Create Rating"
+    expect(page).to have_content 'Has made 1 rating'
+	
+    visit new_rating_path
+    select('Karhu', from:'rating[beer_id]')
+    fill_in('rating[score]', with:'16')
+    click_button "Create Rating"
+  end
+end

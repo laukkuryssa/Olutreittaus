@@ -6,7 +6,7 @@
 </p>
 
 <p>
-  <strong>Year:</strong>
+  <strong>Established at:</strong>
   <%= @brewery.year %>
 </p>
 
@@ -19,6 +19,14 @@
  <% @brewery.beers.each do |beer| %>
    <%= link_to beer.name, beer %>
  <% end %>
+</p>
+
+<p>
+<% if @brewery.ratings.empty? %>
+	 None of the Brewerys beers have yet been rated!
+	<% else %>
+ 	 Has <%= pluralize(@brewery.summa, 'rating') %>, average <%= @brewery.average_rating %>
+	<% end %>
 </p>
 
 <p>

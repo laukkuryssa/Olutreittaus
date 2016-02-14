@@ -24,4 +24,10 @@ FactoryGirl.define do
     style "Lager"
   end
 
+  def create_beer_with_rating(user, score)
+      beer = FactoryGirl.create(:beer)
+      FactoryGirl.create(:rating, score:score, beer:beer, user:user)
+      beer
+    end
+
 end

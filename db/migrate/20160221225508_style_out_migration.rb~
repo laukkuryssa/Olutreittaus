@@ -1,0 +1,4 @@
+class StyleOutMigration < ActiveRecord::Migration
+  def change
+  end
+end

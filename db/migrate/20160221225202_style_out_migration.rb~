@@ -1,0 +1,11 @@
+class StyleLinkBeerMigration < ActiveRecord::Migration
+  def change
+    Beer.all.each do |olut|
+      Style.all.each do |tyyli|
+        if olut.name == tyyli.old_style
+          tyyli.update_attribute :style_id, (olut.id)
+        end
+      end
+    end
+  end
+end

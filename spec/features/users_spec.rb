@@ -37,7 +37,6 @@ it "deletes rating from system by pressing delete" do
     expect(page).to have_content 'Karhu 16'
     click_link('Pekka')
     page.first(:link, "delete").click
-    save_and_open_page
     expect(page).to have_content 'Has made 1 rating'
     expect(page).to have_content 'Karhu 16'
 end
@@ -55,7 +54,6 @@ it "shows users favourite style and brewery" do
     fill_in('rating[score]', with:'16')
     click_button "Create Rating"
     click_link('Pekka')
-    save_and_open_page
     expect(page).to have_content 'Favorite brewery: Koff'
     expect(page).to have_content 'Favorite style: Lager'
 end

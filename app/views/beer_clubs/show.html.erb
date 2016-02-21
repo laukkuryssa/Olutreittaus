@@ -28,5 +28,24 @@
 
 <% end %>
 
+<% if current_user %>
+    <% if not current_user.in? @beer_club.members %>
+    <%= form_for(@membership) do |f| %>
+        <%= f.hidden_field :beer_club_id %>
+        <%= f.submit value:"join the club", class:"btn btn-success" %>
+    <% end %>
+<% end %>
+<% @beer_club.members.each do |user| %>
+        <% if user.id == current_user.id %>
+        <%= form_for(@membership, method: "delete") do |f| %>
+            <%= f.hidden_field :beer_club_id %>
+            <%= f.submit value: "end the membership", class:"btn btn-warning" %>
+        <% end %>
+        <% end %>
+    <% end %>
+<% end %>
+
+
 <%= link_to 'Edit', edit_beer_club_path(@beer_club) %> |
+<%= link_to 'Destroy the club', @beer_club, method: :delete, data: { confirm: 'Are you sure?' } %> |
 <%= link_to 'Back', beer_clubs_path %>

@@ -1,0 +1,4 @@
+class StyleLinkBeerMigration < ActiveRecord::Migration
+  def change
+  end
+end

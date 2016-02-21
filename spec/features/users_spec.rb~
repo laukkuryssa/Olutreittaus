@@ -58,9 +58,6 @@ it "shows users favourite style and brewery" do
     save_and_open_page
     expect(page).to have_content 'Favorite brewery: Koff'
     expect(page).to have_content 'Favorite style: Lager'
-
-
-
 end
 
  it "shows ratings and count of them" do
